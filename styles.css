@@ -52,7 +52,7 @@ h1 {
 
 h2 {
   font-size: 1.0625rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--card-border);
   padding-bottom: 0.4rem;
   font-weight: 500;
@@ -121,7 +121,6 @@ a:hover {
 .links a {
   border-bottom: none;
   color: var(--muted);
-  text-transform: lowercase;
 }
 
 .links a:hover {
@@ -215,63 +214,86 @@ a:hover {
   color: var(--hover);
 }
 
-/* Experience */
+/* Experience — vertical timeline */
 .experience {
   margin-bottom: 3rem;
 }
 
-.job {
-  margin-bottom: 2rem;
-  border-bottom: 1px dashed var(--card-border-soft);
-  padding-bottom: 1.25rem;
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 0.25rem;
+  position: relative;
 }
 
-.job:last-child {
-  border-bottom: none;
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0;
+  width: 1px;
+  background: var(--card-border);
 }
 
-.job header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
+.timeline-item {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: 2.25rem;
 }
 
-.job header h3 {
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.job-meta {
+  font-size: 0.6875rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.5rem;
+}
+
+.job-title {
   font-size: 0.9375rem;
-  color: var(--accent);
   font-weight: 600;
-}
-
-.job header h3 .muted {
   color: var(--fg);
-  font-weight: 400;
+  margin: 0;
 }
 
-.job-context {
-  color: var(--muted);
+.job-org {
   font-size: 0.875rem;
-  font-style: normal;
-  margin: 0.25rem 0 0.75rem;
+  color: var(--accent);
+  margin: 0.2rem 0 0.5rem;
 }
 
-.job ul {
+.job-bullets {
+  list-style: square;
   padding-left: 1.1rem;
-  margin: 0.5rem 0 0;
+  margin: 0.75rem 0 0;
 }
 
-.job li {
-  margin: 0.35rem 0;
+.job-bullets li {
+  margin: 0.4rem 0;
   font-size: 0.9375rem;
 }
 
-.job li::marker {
-  color: var(--muted);
+.job-bullets li::marker {
+  color: var(--accent);
 }
 
-.job li strong {
+.job-bullets li strong {
   font-weight: 600;
   color: var(--accent);
 }
@@ -373,11 +395,6 @@ footer p {
 
   .edu-row {
     flex-direction: column;
-  }
-
-  .job header {
-    flex-direction: column;
-    gap: 0.25rem;
   }
 }
 
