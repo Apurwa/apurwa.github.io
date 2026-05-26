@@ -30,12 +30,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "tnum", "calt";
+  overflow-x: hidden;
+  width: 100%;
 }
 
 main {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 5rem 1.5rem 3rem;
+  width: min(100vw, var(--max-width));
 }
 
 h1, h2, h3 {
@@ -65,6 +68,17 @@ h3 {
 
 p {
   margin: 0.75rem 0;
+  overflow-wrap: break-word;
+}
+
+.hero .lede,
+.hero .proof,
+.card p,
+.work-card h3,
+.work-card p,
+.work-card li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 a {
@@ -96,10 +110,17 @@ a:hover {
 }
 
 .hero .lede {
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: var(--fg);
   margin-top: 0.75rem;
   max-width: 42em;
+}
+
+.hero .proof {
+  color: var(--fg);
+  font-size: 0.9375rem;
+  margin-top: 0.8rem;
+  max-width: 48em;
 }
 
 .hero .meta {
@@ -127,7 +148,7 @@ a:hover {
   color: var(--hover);
 }
 
-/* Stats — bordered cards in a grid */
+/* Stats */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -143,6 +164,7 @@ a:hover {
   border-radius: 4px;
   padding: 1.25rem 1.1rem;
   background: transparent;
+  min-width: 0;
 }
 
 .stat-num {
@@ -172,6 +194,7 @@ a:hover {
   border-radius: 4px;
   padding: 1.25rem 1.5rem;
   background: transparent;
+  min-width: 0;
 }
 
 .card-head {
@@ -214,7 +237,60 @@ a:hover {
   color: var(--hover);
 }
 
-/* Experience — vertical timeline */
+/* Selected work */
+.selected-work {
+  margin-bottom: 3rem;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.work-card {
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 1.1rem;
+  min-width: 0;
+}
+
+.work-kicker {
+  color: var(--muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.65rem;
+  text-transform: uppercase;
+}
+
+.work-card h3 {
+  color: var(--accent);
+  font-size: 0.9375rem;
+  margin-bottom: 0.75rem;
+  overflow-wrap: break-word;
+}
+
+.work-card p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.work-card ul {
+  list-style: square;
+  margin: 0.9rem 0 0;
+  padding-left: 1rem;
+}
+
+.work-card li {
+  font-size: 0.8125rem;
+  margin: 0.35rem 0;
+}
+
+.work-card li::marker {
+  color: var(--accent);
+}
+
+/* Experience */
 .experience {
   margin-bottom: 3rem;
   font-family: "Geist Mono", ui-monospace, monospace;
@@ -300,6 +376,28 @@ a:hover {
   color: var(--accent);
 }
 
+/* Principles */
+.principles {
+  margin-bottom: 3rem;
+}
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+.principle-grid h3 {
+  color: var(--accent);
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
+.principle-grid p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
 /* Education */
 .education {
   margin-bottom: 3rem;
@@ -357,6 +455,17 @@ a:hover {
   color: var(--fg);
 }
 
+/* CTA */
+.cta {
+  border-top: 1px solid var(--card-border-soft);
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.cta p {
+  max-width: 48em;
+}
+
 /* Footer */
 footer {
   max-width: var(--max-width);
@@ -374,16 +483,56 @@ footer p {
 /* Responsive */
 @media (max-width: 720px) {
   main {
-    padding: 3rem 1.25rem 2rem;
+    max-width: calc(100vw - 4rem);
+    padding: 3rem 0 2rem;
+    width: calc(100vw - 4rem);
+  }
+
+  section,
+  .card,
+  .stat,
+  .work-card {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li {
+    overflow-wrap: anywhere;
   }
 
   h1 {
     font-size: 1.625rem;
   }
 
+  .hero .lede,
+  .hero .proof,
+  .card p,
+  .work-card p,
+  .work-card li {
+    max-width: 32ch;
+  }
+
+  .card-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .dates {
+    white-space: normal;
+  }
+
   .stats {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+  }
+
+  .work-grid,
+  .principle-grid {
+    grid-template-columns: 1fr;
   }
 
   .stat-num {
