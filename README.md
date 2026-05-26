@@ -6,11 +6,11 @@ Single-page minimalist portfolio. Plain HTML + CSS + a tiny bit of JS. No build 
 
 ## Structure
 
-- `index.html` — all content
-- `styles.css` — typography and layout
-- `script.js` — stat counter animation (intersection-observer)
+- `index.html` - all content
+- `styles.css` - typography and layout
+- `script.js` - stat counter animation (intersection-observer)
 - `assets/favicon.svg`
-- `resume.pdf` — sourced from [Apurwa/Resume](https://github.com/Apurwa/Resume); the hero links directly to that repo so I only update the resume in one place
+- `Apurwa-Sarwajit-AI-Product-Lead-Resume.pdf` - public resume PDF linked from the hero
 
 ## Editing
 
@@ -27,4 +27,4 @@ Or just open `index.html` directly in a browser.
 
 ## Inspiration
 
-Layout follows the structure of [basrizk.github.io](https://basrizk.github.io/) — hero, stats, currently, experience, education, skills. Light theme, system font.
+Layout follows the structure of [basrizk.github.io](https://basrizk.github.io/): hero, stats, currently, experience, education, skills. Light theme, system font.
