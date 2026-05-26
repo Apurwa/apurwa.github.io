@@ -3,5 +3,5 @@
   <rect x="2" y="2" width="60" height="60" rx="6" fill="none" stroke="#d4c89f" stroke-width="2"/>
   <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle"
         font-family="ui-monospace, 'SF Mono', Menlo, monospace"
-        font-size="34" font-weight="600" fill="#7d6a2b">a</text>
+        font-size="26" font-weight="600" fill="#7d6a2b">AS</text>
 </svg>
