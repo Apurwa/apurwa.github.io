@@ -217,6 +217,8 @@ a:hover {
 /* Experience — vertical timeline */
 .experience {
   margin-bottom: 3rem;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
 }
 
 .timeline {
@@ -258,7 +260,7 @@ a:hover {
 }
 
 .job-meta {
-  font-size: 0.6875rem;
+  font-size: 0.8rem;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -266,14 +268,14 @@ a:hover {
 }
 
 .job-title {
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--fg);
   margin: 0;
 }
 
 .job-org {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: var(--accent);
   margin: 0.2rem 0 0.5rem;
 }
@@ -286,7 +288,7 @@ a:hover {
 
 .job-bullets li {
   margin: 0.4rem 0;
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
 }
 
 .job-bullets li::marker {
