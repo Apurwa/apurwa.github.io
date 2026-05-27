@@ -2,12 +2,13 @@
 
 Personal site at https://apurwa.github.io.
 
-Single-page minimalist portfolio. Plain HTML + CSS. No build step.
+Single-page minimalist portfolio. Plain HTML, CSS, and a small scroll interaction. No build step.
 
 ## Structure
 
 - `index.html` - all content
 - `styles.css` - typography and layout
+- `script.js` - scroll-revealed header interaction
 - `assets/favicon.svg`
 - `Apurwa-Sarwajit-AI-Product-Lead-Resume.pdf` - public resume PDF linked from the hero
 
