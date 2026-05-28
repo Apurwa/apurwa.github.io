@@ -17,6 +17,12 @@
 html {
   scroll-padding-top: 5.5rem;
   background: var(--bg);
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -31,6 +37,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "tnum", "calt";
+  -ms-overflow-style: none;
   overflow-x: hidden;
   width: 100%;
 }
@@ -120,7 +127,7 @@ body::after {
 }
 
 .landing-left h1 {
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-size: clamp(1.45rem, 2.45vw, 1.95rem);
   line-height: 1.15;
   max-width: 13em;
   transform-origin: left center;
@@ -178,7 +185,6 @@ p {
   overflow-wrap: break-word;
 }
 
-.landing-left .lede,
 .landing-left .proof,
 .card p,
 .work-card h3,
@@ -226,20 +232,15 @@ a:hover {
   top: 4rem;
 }
 
-.landing-left .lede {
-  font-size: 1rem;
+.landing-left .proof {
   color: var(--fg);
+  font-size: 0.75rem;
   line-height: 1.55;
-  margin-top: 1.15rem;
-  max-width: 28em;
 }
 
 .landing-left .proof {
-  color: var(--fg);
-  font-size: 0.875rem;
-  line-height: 1.65;
-  margin-top: 1.25rem;
-  max-width: 35em;
+  margin-top: 0.95rem;
+  max-width: 42em;
 }
 
 .landing-left .meta {
@@ -251,11 +252,11 @@ a:hover {
 .links {
   list-style: none;
   padding: 0;
-  margin: 1.85rem 0 0;
+  margin: 1.35rem 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.45rem;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
 }
 
 .links a {
@@ -433,19 +434,75 @@ a:hover {
   margin-bottom: 3rem;
 }
 
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.section-head {
+  align-items: center;
+  display: flex;
   gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.section-head h2 {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.slider-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slider-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  height: 2rem;
+  justify-content: center;
+  padding: 0;
+  transition: border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+  width: 2rem;
+}
+
+.slider-button:hover {
+  border-color: var(--accent);
+  color: var(--hover);
+  transform: translateY(-1px);
+}
+
+.slider-button:disabled {
+  color: var(--card-border);
+  cursor: default;
+  transform: none;
+}
+
+.work-grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: hidden;
+  padding: 0.15rem 0 0.8rem;
+  scroll-padding-left: 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.work-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .work-card {
   background: rgba(241, 235, 217, 0.5);
   border: 1px solid var(--card-border);
   border-radius: 4px;
+  flex: 0 0 calc((100% - 2rem) / 3);
   padding: 1.1rem;
   min-width: 0;
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
@@ -491,19 +548,32 @@ a:hover {
   margin: 0;
 }
 
-.work-card ul {
-  list-style: square;
+.work-facts {
+  border-top: 1px solid rgba(215, 199, 131, 0.72);
   margin: 0.9rem 0 0;
-  padding-left: 1rem;
+  padding-top: 0.65rem;
 }
 
-.work-card li {
-  font-size: 0.8125rem;
+.work-facts div {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 4.5rem 1fr;
   margin: 0.35rem 0;
 }
 
-.work-card li::marker {
-  color: var(--accent);
+.work-facts dt,
+.work-facts dd {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.work-facts dt {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.work-facts dd {
+  color: var(--fg);
 }
 
 /* Experience */
@@ -649,6 +719,25 @@ a:hover {
   color: var(--fg);
 }
 
+/* Thinking */
+.thinking {
+  margin-bottom: 3rem;
+}
+
+.thinking-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.thinking-grid p {
+  border-left: 1px solid var(--card-border);
+  color: var(--fg);
+  font-size: 0.875rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
 /* CTA */
 .cta {
   border-top: 1px solid var(--card-border-soft);
@@ -758,12 +847,11 @@ footer p {
     font-size: 1.625rem;
   }
 
-  .landing-left .lede,
   .landing-left .proof,
   .card p,
   .work-card p,
-  .work-card li {
-    max-width: 32ch;
+  .work-facts dd {
+    max-width: 38ch;
   }
 
   .landing {
@@ -777,7 +865,7 @@ footer p {
   }
 
   .landing-left h1 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 
   .landing-right {
@@ -813,8 +901,30 @@ footer p {
     white-space: normal;
   }
 
-  .work-grid {
+  .thinking-grid {
     grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    align-items: flex-end;
+  }
+
+  .slider-button {
+    height: 1.85rem;
+    width: 1.85rem;
+  }
+
+  .work-grid {
+    padding-right: 0;
+  }
+
+  .work-card {
+    flex-basis: 100%;
+  }
+
+  .work-facts div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
   }
 
   .skill-grid {

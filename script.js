@@ -3,7 +3,10 @@ const headerName = document.querySelector(".header-name");
 const landing = document.querySelector(".landing");
 const landingLeft = document.querySelector(".landing-left");
 const heroName = document.querySelector(".landing-left h1");
-const revealItems = document.querySelectorAll(".landing-group, .work-card, .timeline-item, .education, .skills, .cta");
+const revealItems = document.querySelectorAll(".landing-group, .work-card, .timeline-item, .education, .skills, .thinking, .cta");
+const workSlider = document.querySelector(".work-grid");
+const workPrev = document.querySelector(".work-prev");
+const workNext = document.querySelector(".work-next");
 
 let headerVisible = false;
 let dockTimer;
@@ -92,4 +95,53 @@ if ("IntersectionObserver" in window) {
   });
 } else {
   revealItems.forEach((item) => item.classList.add("is-in-view"));
+}
+
+if (workSlider && workPrev && workNext) {
+  const workCards = Array.from(workSlider.querySelectorAll(".work-card"));
+
+  function getSlideDistance() {
+    const firstCard = workCards[0];
+    if (!firstCard) return workSlider.clientWidth;
+    const styles = getComputedStyle(workSlider);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    return firstCard.getBoundingClientRect().width + gap;
+  }
+
+  function getVisibleCount() {
+    const distance = getSlideDistance();
+    if (!distance) return 1;
+    return Math.max(1, Math.round(workSlider.clientWidth / distance));
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, workCards.length - getVisibleCount());
+  }
+
+  function getCurrentIndex() {
+    const distance = getSlideDistance();
+    if (!distance) return 0;
+    return Math.min(getMaxIndex(), Math.max(0, Math.round(workSlider.scrollLeft / distance)));
+  }
+
+  function updateSliderControls() {
+    const currentIndex = getCurrentIndex();
+    workPrev.disabled = currentIndex === 0;
+    workNext.disabled = currentIndex >= getMaxIndex();
+  }
+
+  function moveSlider(direction) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const nextIndex = Math.min(getMaxIndex(), Math.max(0, getCurrentIndex() + direction));
+    workSlider.scrollTo({
+      left: nextIndex * getSlideDistance(),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }
+
+  workPrev.addEventListener("click", () => moveSlider(-1));
+  workNext.addEventListener("click", () => moveSlider(1));
+  workSlider.addEventListener("scroll", updateSliderControls, { passive: true });
+  window.addEventListener("resize", updateSliderControls);
+  updateSliderControls();
 }
