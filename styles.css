@@ -4,8 +4,8 @@
   --card-border-soft: #e8dcaa;
   --fg: #1f211b;
   --muted: #6f653b;
-  --accent: #5f531d;
-  --hover: #2f2a10;
+  --accent: #9d0006;
+  --hover: #620004;
   --signal: #35b986;
   --max-width: 920px;
 }
@@ -230,6 +230,24 @@ a:hover {
   align-self: start;
   position: sticky;
   top: 4rem;
+}
+
+.profile-portrait {
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 18px 45px rgba(97, 82, 22, 0.1);
+  margin: 0 0 1.25rem;
+  overflow: hidden;
+  width: clamp(5.5rem, 9vw, 7rem);
+}
+
+.profile-portrait img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  width: 100%;
 }
 
 .landing-left .proof {
@@ -862,6 +880,11 @@ footer p {
 
   .landing-left {
     position: static;
+  }
+
+  .profile-portrait {
+    margin-bottom: 1rem;
+    width: 5.75rem;
   }
 
   .landing-left h1 {
