@@ -3,10 +3,12 @@ const headerName = document.querySelector(".header-name");
 const landing = document.querySelector(".landing");
 const landingLeft = document.querySelector(".landing-left");
 const heroName = document.querySelector(".landing-left h1");
-const revealItems = document.querySelectorAll(".landing-group, .work-card, .timeline-item, .education, .skills, .thinking, .cta");
+const revealItems = document.querySelectorAll(".landing-group, .work-card, .timeline-item, .education, .skills, .thinking, .contact-note");
 const workSlider = document.querySelector(".work-grid");
 const workPrev = document.querySelector(".work-prev");
 const workNext = document.querySelector(".work-next");
+const cursorDot = document.querySelector(".cursor-dot");
+const cursorRing = document.querySelector(".cursor-ring");
 
 let headerVisible = false;
 let dockTimer;
@@ -144,4 +146,49 @@ if (workSlider && workPrev && workNext) {
   workSlider.addEventListener("scroll", updateSliderControls, { passive: true });
   window.addEventListener("resize", updateSliderControls);
   updateSliderControls();
+}
+
+if (cursorDot && cursorRing) {
+  const canUseCustomCursor = window.matchMedia("(pointer: fine)").matches
+    && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (canUseCustomCursor) {
+    const hoverTargets = document.querySelectorAll("a, button, .work-card, .profile-portrait");
+    let dotX = window.innerWidth / 2;
+    let dotY = window.innerHeight / 2;
+    let ringX = dotX;
+    let ringY = dotY;
+    let cursorFrame;
+
+    document.body.classList.add("has-custom-cursor");
+
+    function renderCursor() {
+      ringX += (dotX - ringX) * 0.45;
+      ringY += (dotY - ringY) * 0.45;
+      cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      cursorFrame = window.requestAnimationFrame(renderCursor);
+    }
+
+    window.addEventListener("pointermove", (event) => {
+      dotX = event.clientX;
+      dotY = event.clientY;
+    }, { passive: true });
+
+    hoverTargets.forEach((target) => {
+      target.addEventListener("mouseenter", () => {
+        document.body.classList.add("is-cursor-hovering");
+      });
+
+      target.addEventListener("mouseleave", () => {
+        document.body.classList.remove("is-cursor-hovering");
+      });
+    });
+
+    window.addEventListener("pagehide", () => {
+      window.cancelAnimationFrame(cursorFrame);
+    });
+
+    renderCursor();
+  }
 }

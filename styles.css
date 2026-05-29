@@ -756,14 +756,15 @@ a:hover {
   padding-left: 1rem;
 }
 
-/* CTA */
-.cta {
+/* Contact */
+.contact-note {
   border-top: 1px solid var(--card-border-soft);
   margin-top: 2rem;
   padding-top: 2rem;
 }
 
-.cta p {
+.contact-note p {
+  font-size: 0.875rem;
   max-width: 48em;
 }
 
@@ -792,6 +793,55 @@ footer p {
 .reveal.is-in-view {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Cursor */
+.cursor-dot,
+.cursor-ring {
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.cursor-dot {
+  background: var(--accent);
+  border-radius: 999px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  width: 7px;
+}
+
+.cursor-ring {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  transition: height 0.18s ease, opacity 0.18s ease, width 0.18s ease;
+  width: 30px;
+}
+
+body.has-custom-cursor {
+  cursor: none;
+}
+
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .work-card,
+body.has-custom-cursor .profile-portrait {
+  cursor: none;
+}
+
+body.has-custom-cursor .cursor-dot,
+body.has-custom-cursor .cursor-ring {
+  opacity: 1;
+}
+
+body.has-custom-cursor.is-cursor-hovering .cursor-ring {
+  height: 52px;
+  width: 52px;
 }
 
 @keyframes name-dock {
@@ -960,6 +1010,21 @@ footer p {
   }
 }
 
+@media (pointer: coarse) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor .work-card,
+  body.has-custom-cursor .profile-portrait {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -974,5 +1039,18 @@ footer p {
   .site-header.is-docking .header-name {
     animation: none;
     transition: none;
+  }
+
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor .work-card,
+  body.has-custom-cursor .profile-portrait {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
   }
 }
